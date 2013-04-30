@@ -179,3 +179,23 @@ static int l2b_endian(int in)
 }
 #endif
 
+void bitstream_write_string(
+    unsigned char **bytes,
+    char* string,
+    unsigned int len
+)
+{
+    strncpy((char*)*bytes,string,len);
+    *bytes += len;
+}
+
+void bitstream_read_string(
+    unsigned char **bytes,
+    char* out_string,
+    unsigned int len
+)
+{
+    strncpy(out_string,(char*)*bytes, len);
+    *bytes += len;
+}
+

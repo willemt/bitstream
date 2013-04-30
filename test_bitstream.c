@@ -307,3 +307,22 @@ void TestBitStream_ReadBit(
     CuAssertTrue(tc, 0 == bitstream_read_bit(&cptr_read,&bo));
     CuAssertTrue(tc, 1 == bitstream_read_bit(&cptr_read,&bo));
 }
+
+void TestBitStream_WriteString(
+    CuTest * tc
+)
+{
+    char output[100];
+    unsigned char bits[1000];
+    unsigned char *cptr_write, *cptr_read;
+
+    cptr_write = &bits[0];
+    cptr_read = &bits[0];
+
+    bitstream_init(bits, 1000);
+
+    bitstream_write_string(&cptr_write, "testing", strlen("testing"));
+
+    bitstream_read_string(&cptr_read, output, strlen("testing"));
+    CuAssertTrue(tc, 0 == strncmp(output,"testing",strlen("testing")));
+}
