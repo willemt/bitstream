@@ -181,7 +181,7 @@ static int l2b_endian(int in)
 
 void bitstream_write_string(
     unsigned char **bytes,
-    char* string,
+    const char* string,
     unsigned int len
 )
 {
