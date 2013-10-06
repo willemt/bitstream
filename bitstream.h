@@ -5,6 +5,12 @@ void bitstream_write_ubyte( unsigned char **bytes, unsigned char value);
 
 void bitstream_write_uint32( unsigned char **bytes, uint32_t value);
 
+void bitstream_write_bit_from_bitoffset(
+    unsigned char **bytes,
+    const uint32_t val,
+    int* read_pos_bits
+);
+
 unsigned char bitstream_read_ubyte( unsigned char **bytes);
 
 uint32_t bitstream_read_uint32( unsigned char **bytes);

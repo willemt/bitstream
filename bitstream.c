@@ -99,6 +99,15 @@ void bitstream_write_uint32_from_bitoffset(
     *read_pos_bits += nbits;
 }
 
+void bitstream_write_bit_from_bitoffset(
+    unsigned char **bytes,
+    const uint32_t val,
+    int* read_pos_bits
+)
+{
+    bitstream_write_uint32_from_bitoffset(bytes,val,1,read_pos_bits);
+}
+
 void bitstream_read_uint32_from_bitoffset(
     unsigned char **bytes,
     uint32_t * val,
