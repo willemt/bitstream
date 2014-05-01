@@ -25,13 +25,7 @@ void bitstream_write_uint32(
     uint32_t value
 )
 {
-    uint32_t *ptr;
-
-    ptr = (uint32_t *) (*bytes);
-
-    //*ptr = htonl(value);
-    *ptr = value;
-
+    memcpy(*bytes, &value, sizeof(uint32_t));
     *bytes += 4;
 }
 
@@ -39,11 +33,8 @@ unsigned char bitstream_read_ubyte(
     unsigned char **bytes
 )
 {
-    unsigned char val;
-
-    val = **bytes;
+    unsigned char val = **bytes;
     *bytes += 1;
-
     return val;
 }
 
@@ -51,49 +42,42 @@ uint32_t bitstream_read_uint32(
     unsigned char **bytes
 )
 {
-    uint32_t *ptr;
+    uint32_t value;
 
-    ptr = (uint32_t *) (*bytes);
-
-    *bytes += 4;
-
-    //return ntohl(*ptr);
-    return *ptr;
+    memcpy(&value, *bytes, sizeof(uint32_t));
+    *bytes += sizeof(uint32_t);
+    return value;
 }
 
 void bitstream_write_uint32_from_bitoffset(
     unsigned char **bytes,
     const uint32_t val,
     const unsigned int nbits,
-    int* read_pos_bits
+    unsigned int* read_pos_bits
 )
 {
-    int bit_offset, int_offset;
-    uint32_t val1, *ptr;
+    unsigned int bit_offset, int_offset;
+    uint32_t val_posting;
 
     assert(nbits <= 32);
 
-    /* position pointer */
     int_offset = (*read_pos_bits - *read_pos_bits % 32) / 32;
     bit_offset = *read_pos_bits % 32;
-    ptr = (uint32_t*)*bytes + int_offset;
+
+    memcpy(&val_posting, *bytes + (int_offset) * sizeof(uint32_t), sizeof(uint32_t));
 
     /* write bytes out */
-    val1 = val;
-    val1 <<= 32 - nbits;
-    val1 >>= bit_offset;
-
-    //*ptr = htonl(ntohl(*ptr) | val1);
-    *ptr = *ptr | val1;
+    val_posting = val_posting | ((val << (32 - nbits)) >> bit_offset);
+    //memcpy(*bytes, &val_posting, sizeof(uint32_t));
+    memcpy(*bytes + (int_offset) * sizeof(uint32_t), &val_posting, sizeof(uint32_t));
 
     /* do right handside */
     if (32 < bit_offset + nbits)
     {
-        int nbits2;
-        
-        nbits2 = (bit_offset + nbits) % 32;
-        ptr++;
-        *ptr = val << (32 - nbits2);
+        int nbits2 = (bit_offset + nbits) % 32;
+        val_posting = val << (32 - nbits2);
+        //memcpy(*bytes, &val_posting, sizeof(uint32_t));
+        memcpy(*bytes + (int_offset + 1) * sizeof(uint32_t), &val_posting, sizeof(uint32_t));
     }
 
     *read_pos_bits += nbits;
@@ -102,7 +86,7 @@ void bitstream_write_uint32_from_bitoffset(
 void bitstream_write_bit_from_bitoffset(
     unsigned char **bytes,
     const uint32_t val,
-    int* read_pos_bits
+    unsigned int* read_pos_bits
 )
 {
     bitstream_write_uint32_from_bitoffset(bytes,val,1,read_pos_bits);
@@ -110,39 +94,39 @@ void bitstream_write_bit_from_bitoffset(
 
 void bitstream_read_uint32_from_bitoffset(
     unsigned char **bytes,
-    uint32_t * val,
+    uint32_t * val_out,
     const unsigned int nbits,
-    int* read_pos_bits
+    unsigned int* read_pos_bits
 )
 {
-    int bit_offset, int_offset;
-    uint32_t *ptr;
+    unsigned int bit_offset, int_offset;
 
     assert(nbits <= 32);
 
     /* position pointer */
     int_offset = (*read_pos_bits - *read_pos_bits % 32) / 32;
     bit_offset = *read_pos_bits % 32;
-    ptr = (uint32_t*)*bytes + int_offset;
 
     /* read bytes */
     //*val = ntohl(*ptr);
     //*val = l2b_endian(*ptr);
-    *val = *ptr;
-    *val <<= bit_offset;
-    *val >>= 32 - nbits;
+    memcpy(val_out, *bytes + int_offset * sizeof(uint32_t), sizeof(uint32_t));
+    *val_out <<= bit_offset;
+    *val_out >>= 32 - nbits;
 
     /* do otherside */
     if (32 < bit_offset + nbits)
     {
         int nbits2;
+        uint32_t val;
         
         nbits2 = (bit_offset + nbits) % 32;
-        ptr++;
+        memcpy(&val, *bytes + (int_offset + 1) * sizeof(uint32_t), sizeof(uint32_t));
 
         //*val |= ntohl(*ptr) >> (32 - nbits2);
         //*val |= l2b_endian(*ptr) >> (32 - nbits2);
-        *val |= *ptr >> (32 - nbits2);
+        //*val_out |= *ptr >> (32 - nbits2);
+        *val_out |= val >> (32 - nbits2);
     }
 
     *read_pos_bits += nbits;
@@ -154,12 +138,12 @@ void bitstream_read_uint32_from_bitoffset(
  */
 int bitstream_read_bit(
     unsigned char **bytes,
-    int* read_pos_bits
+    unsigned int* read_pos_bits
 )
 {
     uint32_t *ptr;
     uint32_t val;
-    int bit_offset, int_offset;
+    unsigned int bit_offset, int_offset;
 
     /* position pointer */
     int_offset = (*read_pos_bits - *read_pos_bits % 32) / 32;

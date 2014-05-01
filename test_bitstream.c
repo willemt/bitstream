@@ -113,7 +113,7 @@ void TestBitStream_WriteFirstUint32II(
     bitstream_init(bits, 1000);
 
     bo = 0;
-    bitstream_write_uint32_from_bitoffset(&cptr_write,32768, 32, &bo);
+    bitstream_write_uint32_from_bitoffset(&cptr_write, 32768, 32, &bo);
 
     bo = 0;
     bitstream_read_uint32_from_bitoffset(&cptr_read, &val, 32, &bo);
