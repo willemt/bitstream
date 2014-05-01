@@ -83,7 +83,7 @@ void TestBitStream_WriteFirstUint32(
     unsigned char bits[1000];
     uint32_t val;
     unsigned char *cptr_write, *cptr_read;
-    int bo;
+    unsigned int bo;
 
     cptr_write = &bits[0];
     cptr_read = &bits[0];
@@ -106,7 +106,7 @@ void TestBitStream_WriteFirstUint32II(
     unsigned char bits[1000];
     uint32_t val;
     unsigned char *cptr_write, *cptr_read;
-    int bo;
+    unsigned int bo;
 
     cptr_write = &bits[0];
     cptr_read = &bits[0];
@@ -127,7 +127,7 @@ void TestBitStream_WriteTwo(
     unsigned char bits[1000];
     uint32_t val;
     unsigned char *cptr_write, *cptr_read;
-    int bo;
+    unsigned int bo;
 
     cptr_write = &bits[0];
     cptr_read = &bits[0];
@@ -151,7 +151,7 @@ void TestBitStream_WriteThree(
     unsigned char bits[1000];
     uint32_t val;
     unsigned char *cptr_write, *cptr_read;
-    int bo;
+    unsigned int bo;
 
     cptr_write = &bits[0];
     cptr_read = &bits[0];
@@ -178,7 +178,7 @@ void TestBitStream_WriteFive(
     unsigned char bits[1000];
     uint32_t val;
     unsigned char *cptr_write, *cptr_read;
-    int bo;
+    unsigned int bo;
 
     cptr_write = &bits[0];
     cptr_read = &bits[0];
@@ -212,7 +212,7 @@ void TestBitStream_WriteCrossBoundary(
     unsigned char bits[1000];
     uint32_t val;
     unsigned char *cptr_write, *cptr_read;
-    int bo;
+    unsigned int bo;
 
     cptr_write = &bits[0];
     cptr_read = &bits[0];
@@ -237,7 +237,7 @@ void TestBitStream_WriteCrossBoundaryII(
     unsigned char bits[1000];
     uint32_t val;
     unsigned char *cptr_write, *cptr_read;
-    int bo;
+    unsigned int bo;
 
     cptr_write = &bits[0];
     cptr_read = &bits[0];
@@ -265,7 +265,7 @@ void TestBitStream_WriteCrossBoundaryIII(
     unsigned char bits[1000];
     uint32_t val;
     unsigned char *cptr_write, *cptr_read;
-    int bo;
+    unsigned int bo;
 
     cptr_write = &bits[0];
     cptr_read = &bits[0];
@@ -292,7 +292,7 @@ void TestBitStream_ReadBit(
 {
     unsigned char bits[1000];
     unsigned char *cptr_write, *cptr_read;
-    int bo;
+    unsigned int bo;
 
     cptr_write = &bits[0];
     cptr_read = &bits[0];
@@ -314,7 +314,7 @@ void TestBitStream_WriteBitIncreasesBitOffset(
 {
     unsigned char bits[1000];
     unsigned char *cptr_write;
-    int bo;
+    unsigned int bo;
 
     bo = 0;
     cptr_write = &bits[0];
@@ -330,7 +330,7 @@ void TestBitStream_WriteBit(
 {
     unsigned char bits[1000];
     unsigned char *cptr_write, *cptr_read;
-    int bo;
+    unsigned int bo;
 
     cptr_write = &bits[0];
     cptr_read = &bits[0];
