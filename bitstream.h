@@ -28,38 +28,65 @@ void bitstream_write_bit_from_bitoffset(
 );
 
 /**
- * Write out bit value to bitstream.
- * Only increment b by 1 when bit_pos will be 8
+ * Write out up to 32bits bitstream.
+ * Increment b by bit_pos will be 8
+ *
+ * @param val value to be written
+ * @param nbits number of bits to be written 
  * @param bit_pos Current bit offset within bitstream */
 void bitstream_write_uint32_from_bitoffset(
     unsigned char **b,
     const uint32_t val,
     const unsigned int nbits,
-    unsigned int* read_pos_bits);
+    unsigned int* bit_pos);
 
+/**
+ * Write out bit value to bitstream.
+ * Only increment b by 1 when bit_pos will be 8
+ * @param bit_pos Current bit offset within bitstream */
 void bitstream_write_string(
     unsigned char **b,
     const char* string,
     unsigned int len);
 
+/**
+ * Write out bit value to bitstream.
+ * Only increment b by 1 when bit_pos will be 8
+ * @param bit_pos Current bit offset within bitstream */
 void bitstream_read_uint32_from_bitoffset(
     unsigned char **b,
     uint32_t * val,
     const unsigned int nbits,
     unsigned int* bit_pos);
 
+/**
+ * Write out bit value to bitstream.
+ * Only increment b by 1 when bit_pos will be 8
+ * @param bit_pos Current bit offset within bitstream */
 int bitstream_read_bit(
     unsigned char **b,
-    unsigned int* read_pos_bits);
+    unsigned int* bit_pos);
 
+/**
+ * Write out bit value to bitstream.
+ * Only increment b by 1 when bit_pos will be 8
+ * @param bit_pos Current bit offset within bitstream */
 void bitstream_read_string(
     unsigned char **b,
     char* out_string,
     unsigned int len);
 
+/**
+ * Write out bit value to bitstream.
+ * Only increment b by 1 when bit_pos will be 8
+ * @param bit_pos Current bit offset within bitstream */
 unsigned char bitstream_read_ubyte(
     unsigned char **b);
 
+/**
+ * Write out bit value to bitstream.
+ * Only increment b by 1 when bit_pos will be 8
+ * @param bit_pos Current bit offset within bitstream */
 uint32_t bitstream_read_uint32(
     unsigned char **b);
 
