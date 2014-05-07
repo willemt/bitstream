@@ -41,17 +41,17 @@ void bitstream_write_uint32_from_bitoffset(
     unsigned int* bit_pos);
 
 /**
- * Write out bit value to bitstream.
- * Only increment b by 1 when bit_pos will be 8
- * @param bit_pos Current bit offset within bitstream */
+ * Write out string to bitstream. Increment b by length of string
+ * @param string The string to be written
+ * @param len Length of string */
 void bitstream_write_string(
     unsigned char **b,
     const char* string,
     unsigned int len);
 
 /**
- * Write out bit value to bitstream.
- * Only increment b by 1 when bit_pos will be 8
+ * Read uint32 from bitstream.
+ * Increment b by 4 
  * @param bit_pos Current bit offset within bitstream */
 void bitstream_read_uint32_from_bitoffset(
     unsigned char **b,
