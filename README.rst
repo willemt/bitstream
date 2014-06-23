@@ -21,7 +21,7 @@ Check out quick example::
     unsigned int bit_offset = 0;
     bitstream_write_bit_from_bitoffset(&b, 1, &bit_offset);
     
-    `/* write out 31 bits of a uint32. Move pointer 4 bytes forward */
+    /* write out 31 bits of a uint32. Move pointer 4 bytes forward */
     bitstream_write_uint32_from_bitoffset(&b, 0xFF00FF00, 31, &bit_offset);
 
 
