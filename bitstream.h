@@ -12,7 +12,7 @@ void bitstream_write_ubyte(
     unsigned char value);
 
 /**
- * Write out byte value to bitstream. Increment b by 4 */
+ * Write out uint32 value to bitstream. Increment b by 4 */
 void bitstream_write_uint32(
     unsigned char **b,
     uint32_t value);
@@ -28,8 +28,8 @@ void bitstream_write_bit_from_bitoffset(
 );
 
 /**
- * Write out up to 32bits bitstream.
- * Increment b by bit_pos will be 8
+ * Write out up to 32bits to bitstream.
+ * Increment b according to bit_pos
  *
  * @param val value to be written
  * @param nbits number of bits to be written 
@@ -60,16 +60,17 @@ void bitstream_read_uint32_from_bitoffset(
     unsigned int* bit_pos);
 
 /**
- * Write out bit value to bitstream.
+ * Read one bit from bitstream.
  * Only increment b by 1 when bit_pos will be 8
- * @param bit_pos Current bit offset within bitstream */
+ * @param bit_pos Current bit offset within bitstream
+ * @return bit's value */
 int bitstream_read_bit(
     unsigned char **b,
     unsigned int* bit_pos);
 
 /**
- * Write out bit value to bitstream.
- * Only increment b by 1 when bit_pos will be 8
+ * Read string from bitstream.
+ * Increment by len
  * @param bit_pos Current bit offset within bitstream */
 void bitstream_read_string(
     unsigned char **b,
@@ -77,16 +78,16 @@ void bitstream_read_string(
     unsigned int len);
 
 /**
- * Write out bit value to bitstream.
- * Only increment b by 1 when bit_pos will be 8
- * @param bit_pos Current bit offset within bitstream */
+ * Read byte from bitstream
+ * Increment b by 1
+ * @param byte value */
 unsigned char bitstream_read_ubyte(
     unsigned char **b);
 
 /**
- * Write out bit value to bitstream.
- * Only increment b by 1 when bit_pos will be 8
- * @param bit_pos Current bit offset within bitstream */
+ * Read uint32 from bitstream.
+ * Increment by 4 bytes
+ * @return value of uint32 */
 uint32_t bitstream_read_uint32(
     unsigned char **b);
 
