@@ -118,13 +118,14 @@ void bitstream_write_bit_from_bitoffset(
     unsigned int bit_offset = *bit_pos % 8;
     unsigned char *ptr = *b + byte_offset;
 
-    unsigned char old = *ptr;
-    unsigned char stamp = val != 0;
+    unsigned char stamp;
+    
+    stamp = val != 0;
+    stamp <<= 8 -1;
+    stamp >>= bit_offset;
+    *ptr |= stamp;
 
-    old <<= bit_offset;
-    old >>= 8 - 1;
     *bit_pos += 1;
-    return val == 1;
 }
 
 void bitstream_read_uint32_from_bitoffset(

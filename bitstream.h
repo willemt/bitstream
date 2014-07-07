@@ -91,4 +91,10 @@ unsigned char bitstream_read_ubyte(
 uint32_t bitstream_read_uint32(
     unsigned char **b);
 
+void bitstream_write_ubyte_from_bitoffset(
+    unsigned char **b,
+    unsigned char value,
+    unsigned int* bit_pos);
+
+
 #endif /* BITSTREAM_H */
