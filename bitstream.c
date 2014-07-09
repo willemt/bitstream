@@ -124,7 +124,6 @@ void bitstream_write_bit_from_bitoffset(
     stamp <<= 8 -1;
     stamp >>= bit_offset;
     *ptr |= stamp;
-
     *bit_pos += 1;
 }
 
