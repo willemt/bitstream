@@ -157,6 +157,7 @@ void TestBitstream_UbyteWriteWith4BitOffset(
     cptr_write = &num[0];
     bitstream_write_ubyte_from_bitoffset(&cptr_write, 0x0, &bo);
     cptr_read = &num[0];
+    bo = 0;
     CuAssertTrue(tc, 1 == bitstream_read_bit(&cptr_read, &bo));
     CuAssertTrue(tc, 1 == bitstream_read_bit(&cptr_read, &bo));
     CuAssertTrue(tc, 1 == bitstream_read_bit(&cptr_read, &bo));
@@ -180,11 +181,12 @@ void TestBitstream_UbyteWriteWith8BitOffset(
     unsigned char *cptr_write = &num[0];
     unsigned char *cptr_read = &num[0];
 
-    bitstream_write_ubyte(&cptr_write, 0xFF);
+    bitstream_write_ubyte(&cptr_write, 0x05);
     unsigned int bo = 8;
-    bitstream_write_ubyte_from_bitoffset(&cptr_write, 0x0, &bo);
-    CuAssertTrue(tc, 0x00 == bitstream_read_ubyte(&cptr_read));
-    CuAssertTrue(tc, 0xFF == bitstream_read_ubyte(&cptr_read));
+    cptr_write = &num[0];
+    bitstream_write_ubyte_from_bitoffset(&cptr_write, 0xAF, &bo);
+    CuAssertTrue(tc, 0x05 == bitstream_read_ubyte(&cptr_read));
+    CuAssertTrue(tc, 0xAF == bitstream_read_ubyte(&cptr_read));
 }
 
 void TestBitstream_Uint32WriteRead(

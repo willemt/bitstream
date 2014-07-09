@@ -33,8 +33,8 @@ void bitstream_write_ubyte_from_bitoffset(
 
     /* left half */
     unsigned char val = *ptr;
+    val >>= bit_offset;
     val <<= bit_offset;
-    val >>= 8 - 1;
     val |= value >> bit_offset;
     *ptr = val;
 
@@ -119,7 +119,7 @@ void bitstream_write_bit_from_bitoffset(
     unsigned char *ptr = *b + byte_offset;
 
     unsigned char stamp;
-    
+
     stamp = val != 0;
     stamp <<= 8 -1;
     stamp >>= bit_offset;
@@ -154,7 +154,7 @@ void bitstream_read_uint32_from_bitoffset(
     {
         int nbits2;
         uint32_t val;
-        
+
         nbits2 = (bit_offset + nbits) % 32;
         memcpy(&val, *b + (int_offset + 1) * sizeof(uint32_t), sizeof(uint32_t));
 
