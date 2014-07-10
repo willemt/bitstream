@@ -4,7 +4,7 @@
 #include "bitstream.h"
 #include <stdio.h>
 
-void TestBitStream_WriteBitIncreasesBitOffset(
+void Test_WriteBitIncreasesBitOffset(
     CuTest * tc
 )
 {
@@ -20,7 +20,7 @@ void TestBitStream_WriteBitIncreasesBitOffset(
     CuAssertTrue(tc, 1 == bo);
 }
 
-void TestBitStream_ReadBitNothing(
+void Test_ReadBitNothing(
     CuTest * tc
 )
 {
@@ -36,7 +36,7 @@ void TestBitStream_ReadBitNothing(
     CuAssertTrue(tc, 0 == bitstream_read_bit(&cptr_read, &bo));
 }
 
-void TestBitStream_ReadBit(
+void Test_ReadBit(
     CuTest * tc
 )
 {
@@ -68,7 +68,7 @@ void TestBitStream_ReadBit(
     CuAssertTrue(tc, 1 == bitstream_read_bit(&cptr_read, &bo));
 }
 
-void TestBitStream_WriteBit(
+void Test_WriteBit(
     CuTest * tc
 )
 {
@@ -90,7 +90,7 @@ void TestBitStream_WriteBit(
     CuAssertTrue(tc, 1 == bitstream_read_bit(&cptr_read,&bo));
 }
 
-void TestBitstream_ReadUByteWithNothingResultsInZero(
+void Test_ReadUByteWithNothingResultsInZero(
     CuTest * tc
 )
 {
@@ -102,7 +102,7 @@ void TestBitstream_ReadUByteWithNothingResultsInZero(
     CuAssertTrue(tc, 0 == bitstream_read_ubyte(&cptr_read));
 }
 
-void TestBitstream_UbyteWriteAndRead(
+void Test_UbyteWriteAndRead(
     CuTest * tc
 )
 {
@@ -126,7 +126,7 @@ void TestBitstream_UbyteWriteAndRead(
     CuAssertTrue(tc, 1 == bitstream_read_bit(&cptr_read, &bo));
 }
 
-void TestBitstream_UbyteWriteAndRead2(
+void Test_UbyteWriteAndRead2(
     CuTest * tc
 )
 {
@@ -139,7 +139,7 @@ void TestBitstream_UbyteWriteAndRead2(
     CuAssertTrue(tc, 0x05 == bitstream_read_ubyte(&cptr_read));
 }
 
-void TestBitstream_UbyteWriteWith4BitOffset(
+void Test_UbyteWriteWith4BitOffset(
     CuTest * tc
 )
 {
@@ -172,7 +172,7 @@ void TestBitstream_UbyteWriteWith4BitOffset(
     CuAssertTrue(tc, 0x00 == bitstream_read_ubyte(&cptr_read));
 }
 
-void TestBitstream_UbyteWriteWith8BitOffset(
+void Test_UbyteWriteWith8BitOffset(
     CuTest * tc
 )
 {
@@ -189,24 +189,22 @@ void TestBitstream_UbyteWriteWith8BitOffset(
     CuAssertTrue(tc, 0xAF == bitstream_read_ubyte(&cptr_read));
 }
 
-void TestBitstream_Uint32WriteRead(
+void Test_Uint32WriteRead(
     CuTest * tc
 )
 {
     unsigned char num[10];
     unsigned char *cptr_write, *cptr_read;
-    uint32_t val;
 
     memset(num, 0, sizeof(char) * 10);
     cptr_write = &num[0];
     cptr_read = &num[0];
 
     bitstream_write_uint32(&cptr_write, 0x0F070301);
-    val = bitstream_read_uint32(&cptr_read);
-    CuAssertTrue(tc, val == 0x0F070301);
+    CuAssertTrue(tc, 0x0F070301 == bitstream_read_uint32(&cptr_read));
 }
 
-void TestBitstream_MiscWriteRead(
+void Test_MiscWriteRead(
     CuTest * tc
 )
 {
@@ -230,7 +228,7 @@ void TestBitstream_MiscWriteRead(
     CuAssertTrue(tc, cval == 0xFF);
 }
 
-void TestBitStream_WriteFirstUint32(
+void Test_WriteFirstUint32(
     CuTest * tc
 )
 {
@@ -253,7 +251,7 @@ void TestBitStream_WriteFirstUint32(
     CuAssertTrue(tc, val == 9);
 }
 
-void TestBitStream_WriteFirstUint32II(
+void Test_WriteFirstUint32II(
     CuTest * tc
 )
 {
@@ -274,7 +272,7 @@ void TestBitStream_WriteFirstUint32II(
     CuAssertTrue(tc, val == 32768);
 }
 
-void TestBitStream_WriteTwo(
+void Test_WriteTwo(
     CuTest * tc
 )
 {
@@ -298,7 +296,7 @@ void TestBitStream_WriteTwo(
     CuAssertTrue(tc, val == 255);
 }
 
-void TestBitStream_WriteThree(
+void Test_WriteThree(
     CuTest * tc
 )
 {
@@ -325,7 +323,7 @@ void TestBitStream_WriteThree(
     CuAssertTrue(tc, val == 138);
 }
 
-void TestBitStream_WriteFive(
+void Test_WriteFive(
     CuTest * tc
 )
 {
@@ -359,7 +357,7 @@ void TestBitStream_WriteFive(
     CuAssertTrue(tc, val == 2);
 }
 
-void TestBitStream_WriteCrossBoundary(
+void Test_WriteCrossBoundary(
     CuTest * tc
 )
 {
@@ -384,7 +382,7 @@ void TestBitStream_WriteCrossBoundary(
     CuAssertTrue(tc, val == 32333);
 }
 
-void TestBitStream_WriteCrossBoundaryII(
+void Test_WriteCrossBoundaryII(
     CuTest * tc
 )
 {
@@ -412,7 +410,7 @@ void TestBitStream_WriteCrossBoundaryII(
     CuAssertTrue(tc, val == 32678);
 }
 
-void TestBitStream_WriteCrossBoundaryIII(
+void Test_WriteCrossBoundaryIII(
     CuTest * tc
 )
 {
@@ -440,7 +438,7 @@ void TestBitStream_WriteCrossBoundaryIII(
     CuAssertTrue(tc, val == 31678);
 }
 
-void TestBitStream_WriteString(
+void Test_WriteString(
     CuTest * tc
 )
 {
