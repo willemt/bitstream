@@ -53,7 +53,7 @@ void bitstream_write_uint32(
     *b += sizeof(uint32_t);
 }
 
-char bitstream_read_ubyte(
+char bitstream_read_byte(
     char **b
 )
 {

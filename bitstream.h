@@ -81,7 +81,7 @@ void bitstream_read_string(
  * Read byte from bitstream
  * Increment b by 1
  * @param byte value */
-char bitstream_read_ubyte(
+char bitstream_read_byte(
     char **b);
 
 /**
