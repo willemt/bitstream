@@ -7,7 +7,7 @@ void bitstream_init(
 
 /**
  * Write out byte value to bitstream. Increment b by 1 */
-void bitstream_write_ubyte(
+void bitstream_write_byte(
     char **b,
     char value);
 
@@ -91,7 +91,7 @@ char bitstream_read_byte(
 uint32_t bitstream_read_uint32(
     char **b);
 
-void bitstream_write_ubyte_from_bitoffset(
+void bitstream_write_byte_from_bitoffset(
     char **b,
     char value,
     unsigned int* bit_pos);

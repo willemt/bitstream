@@ -111,7 +111,7 @@ void Test_UbyteWriteAndRead(
     char *cptr_write = &num[0];
     char *cptr_read = &num[0];
 
-    bitstream_write_ubyte(&cptr_write, 0x0FF);
+    bitstream_write_byte(&cptr_write, 0x0FF);
     CuAssertTrue(tc, 0x0FF == (unsigned char)bitstream_read_byte(&cptr_read));
 
     unsigned int bo = 0;
@@ -135,7 +135,7 @@ void Test_UbyteWriteAndRead2(
     char *cptr_write = &num[0];
     char *cptr_read = &num[0];
 
-    bitstream_write_ubyte(&cptr_write, 0x05);
+    bitstream_write_byte(&cptr_write, 0x05);
     CuAssertTrue(tc, 0x05 == bitstream_read_byte(&cptr_read));
 }
 
@@ -150,12 +150,12 @@ void Test_UbyteWriteWith4BitOffset(
     char *cptr_write = &num[0];
     char *cptr_read = &num[0];
 
-    bitstream_write_ubyte(&cptr_write, 0xFF);
+    bitstream_write_byte(&cptr_write, 0xFF);
     CuAssertTrue(tc, 0xFF == (unsigned char)bitstream_read_byte(&cptr_read));
 
     bo = 4;
     cptr_write = &num[0];
-    bitstream_write_ubyte_from_bitoffset(&cptr_write, 0x0, &bo);
+    bitstream_write_byte_from_bitoffset(&cptr_write, 0x0, &bo);
     cptr_read = &num[0];
     bo = 0;
     CuAssertTrue(tc, 1 == bitstream_read_bit(&cptr_read, &bo));
@@ -181,10 +181,10 @@ void Test_UbyteWriteWith8BitOffset(
     char *cptr_write = &num[0];
     char *cptr_read = &num[0];
 
-    bitstream_write_ubyte(&cptr_write, 0x05);
+    bitstream_write_byte(&cptr_write, 0x05);
     unsigned int bo = 8;
     cptr_write = &num[0];
-    bitstream_write_ubyte_from_bitoffset(&cptr_write, 0xAF, &bo);
+    bitstream_write_byte_from_bitoffset(&cptr_write, 0xAF, &bo);
     CuAssertTrue(tc, 0x05 == (unsigned char)bitstream_read_byte(&cptr_read));
     CuAssertTrue(tc, 0xAF == (unsigned char)bitstream_read_byte(&cptr_read));
 }
@@ -217,9 +217,9 @@ void Test_MiscWriteRead(
     cptr_write = &num[0];
     cptr_read = &num[0];
 
-    bitstream_write_ubyte(&cptr_write, 0xFF);
+    bitstream_write_byte(&cptr_write, 0xFF);
     bitstream_write_uint32(&cptr_write, 0x0F070301);
-    bitstream_write_ubyte(&cptr_write, 0xFF);
+    bitstream_write_byte(&cptr_write, 0xFF);
     cval = bitstream_read_byte(&cptr_read);
     CuAssertTrue(tc, (unsigned char)cval == 0xFF);
     ival = bitstream_read_uint32(&cptr_read);

@@ -11,7 +11,7 @@ void bitstream_init(
     memset(b, 0, sizeof(char) * size);
 }
 
-void bitstream_write_ubyte(
+void bitstream_write_byte(
     char **b,
     char value
 )
@@ -20,7 +20,7 @@ void bitstream_write_ubyte(
     *b += 1;
 }
 
-void bitstream_write_ubyte_from_bitoffset(
+void bitstream_write_byte_from_bitoffset(
     char **b,
     char value,
     unsigned int* bit_pos
